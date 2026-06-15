@@ -1,0 +1,7 @@
+Django
+djangorestframework
+Markdown
+django-filter
+mysqlclient
+django-cors-headers
+djangorestframework-simplejwt
