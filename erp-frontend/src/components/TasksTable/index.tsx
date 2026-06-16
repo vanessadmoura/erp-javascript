@@ -31,7 +31,7 @@ const TasksTable = ({ tasksList, refreshList }: Props) => {
     const navigate = useNavigate();
 
     const handleEditTask = (id: number) => {
-        navigate(`/tasks/edit/${id}`)
+        navigate(`/tasks-edit/${id}`)
     }
 
     const handleDeleteTask = async (id: number) => {
@@ -56,70 +56,80 @@ const TasksTable = ({ tasksList, refreshList }: Props) => {
                         </TableHead>
 
                         <TableBody>
-                            {tasksList.map((task) => (
-                                <TableRow hover key={task.id}>
-                                    <TableCell>
-                                        <Typography
-                                            fontWeight="bold"
-                                            gutterBottom
-                                        >
-                                            #{task.id}
+                            {tasksList.length === 0 ? (
+                                <TableRow>
+                                    <TableCell colSpan={5} align="center">
+                                        <Typography color="text.secondary" sx={{ py: 3 }}>
+                                            Nenhuma tarefa cadastrada para esta empresa.
                                         </Typography>
-                                    </TableCell>
-
-                                    <TableCell>
-                                        <Typography
-                                            fontWeight="bold"
-                                            gutterBottom
-                                        >
-                                            {task.title}
-                                        </Typography>
-                                    </TableCell>
-
-
-                                    <TableCell>
-                                        <Typography
-                                            fontWeight="bold"
-                                            gutterBottom
-                                        >
-                                            {task.status}
-                                        </Typography>
-                                    </TableCell>
-
-                                    <TableCell>
-                                        <Typography
-                                            fontWeight="bold"
-                                            gutterBottom
-                                        >
-                                            {task.due_date ? formatAPIdate(task.due_date) : 'Sem prazo'}
-                                        </Typography>
-                                    </TableCell>
-
-                                    <TableCell align='right'>
-                                        {handlePermissionExists('change_task') &&
-                                            <Tooltip title="Editar tarefa" arrow>
-                                                <IconButton
-                                                    color='primary'
-                                                    size='small'
-                                                >
-                                                    <EditTwoTone onClick={() => handleEditTask(task.id)} />
-                                                </IconButton>
-                                            </Tooltip>
-                                        }
-
-                                        {handlePermissionExists('delete_task') &&
-                                            <Tooltip title="Excluir tarefa" arrow>
-                                                <IconButton
-                                                    color='error'
-                                                    size='small'
-                                                >
-                                                    <DeleteTwoTone onClick={() => handleDeleteTask(task.id)} />
-                                                </IconButton>
-                                            </Tooltip>
-                                        }
                                     </TableCell>
                                 </TableRow>
-                            ))}
+                            ) : (
+                                tasksList.map((task) => (
+                                    <TableRow hover key={task.id}>
+                                        <TableCell>
+                                            <Typography
+                                                fontWeight="bold"
+                                                gutterBottom
+                                            >
+                                                #{task.id}
+                                            </Typography>
+                                        </TableCell>
+
+                                        <TableCell>
+                                            <Typography
+                                                fontWeight="bold"
+                                                gutterBottom
+                                            >
+                                                {task.title}
+                                            </Typography>
+                                        </TableCell>
+
+
+                                        <TableCell>
+                                            <Typography
+                                                fontWeight="bold"
+                                                gutterBottom
+                                            >
+                                                {task.status}
+                                            </Typography>
+                                        </TableCell>
+
+                                        <TableCell>
+                                            <Typography
+                                                fontWeight="bold"
+                                                gutterBottom
+                                            >
+                                                {task.due_date ? formatAPIdate(task.due_date) : 'Sem prazo'}
+                                            </Typography>
+                                        </TableCell>
+
+                                        <TableCell align='right'>
+                                            {handlePermissionExists('change_task') &&
+                                                <Tooltip title="Editar tarefa" arrow>
+                                                    <IconButton
+                                                        color='primary'
+                                                        size='small'
+                                                    >
+                                                        <EditTwoTone onClick={() => handleEditTask(task.id)} />
+                                                    </IconButton>
+                                                </Tooltip>
+                                            }
+
+                                            {handlePermissionExists('delete_task') &&
+                                                <Tooltip title="Excluir tarefa" arrow>
+                                                    <IconButton
+                                                        color='error'
+                                                        size='small'
+                                                    >
+                                                        <DeleteTwoTone onClick={() => handleDeleteTask(task.id)} />
+                                                    </IconButton>
+                                                </Tooltip>
+                                            }
+                                        </TableCell>
+                                    </TableRow>
+                                ))
+                            )}
                         </TableBody>
                     </Table>
                 </TableContainer>

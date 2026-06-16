@@ -1,0 +1,9 @@
+erp-frontend/node_modules/
+erp-frontend/build/
+
+backend/__pycache__/
+backend/,mypycache__/
+backend/*.pyc
+backend/*.log
+backend/venv/
+backend/.env

@@ -24,7 +24,7 @@ export const useApi = async <TypeDataResponse> (
         headers['Content-Type'] = 'application/json';
     }
 
-    const requestUrl = new URL(`${BASE_URL}/${normalizedEndpoint}`, window.location.origin);
+    const requestUrl = new URL(`${BASE_URL}/${normalizedEndpoint}/`, window.location.origin);
 
     if (method === 'GET' && data) {
         Object.entries(data).forEach(([key, value]) => {
